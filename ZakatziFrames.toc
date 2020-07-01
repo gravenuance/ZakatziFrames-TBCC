@@ -1,4 +1,4 @@
-## Interface: 30300
+## Interface: 11304
 ## Title: ZakatziFrames
 ## Notes: Pothen eisai re file?
 ## Version: 0.1
