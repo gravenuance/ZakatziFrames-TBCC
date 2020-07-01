@@ -1,0 +1,7 @@
+## Interface: 30300
+## Title: ZakatziFrames
+## Notes: Pothen eisai re file?
+## Version: 0.1
+## Author: Rikos
+## DefaultState: Enabled
+ZakatziFrames.lua
