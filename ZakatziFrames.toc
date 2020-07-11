@@ -1,7 +1,5 @@
 ## Interface: 11305
 ## Title: ZakatziFrames
-## Notes: Pothen eisai re file?
-## Version: 0.1
-## Author: Rikos
+## Notes: Minimal addon for my UI settings
 ## DefaultState: Enabled
 ZakatziFrames.lua
