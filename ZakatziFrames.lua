@@ -5,8 +5,12 @@ local function zf_on_load(self)
     TargetFrame:ClearAllPoints()
     TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",684,-420)
     TargetFrame.SetPoint=function()end
-    MainMenuBarLeftEndCap:Hide()
-    MainMenuBarRightEndCap:Hide()  
+    if MainMenuBarLeftEndCap then
+        MainMenuBarLeftEndCap:Hide()
+    end
+    if MainMenuBarRightEndCap then
+        MainMenuBarRightEndCap:Hide() 
+    end 
     local r={"MultiBarBottomLeft", "MultiBarBottomRight", "Action", "MultiBarLeft", "MultiBarRight"} 
     for b=1,#r do 
         for i=1,12 do 
