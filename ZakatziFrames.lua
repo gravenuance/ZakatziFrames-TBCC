@@ -92,7 +92,7 @@ local function zf_on_load(self)
     function Movebuff() 
         BuffFrame:ClearAllPoints() 
         BuffFrame:SetScale(1.1) 
-        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",-100,80) 
+        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",-120,80) 
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
