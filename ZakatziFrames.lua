@@ -1,4 +1,5 @@
 
+-- Add combat indicator
 local targetCombatFrame = CreateFrame('Frame', nil , TargetFrame)
 targetCombatFrame:SetPoint('LEFT', TargetFrame, 'RIGHT', -68, -15)
 targetCombatFrame:SetSize(25,25)
@@ -29,6 +30,16 @@ local function combatUpdate(self, elapsed)
         self.timeSinceLastUpdate = 0
     end
 end
+
+-- Hide text in player frame.
+local feedbackText = PlayerFrame:CreateFontString(nil, "OVERLAY", "NumberFontNormalHuge")
+PlayerFrame.feedbackText = feedbackText
+PlayerFrame.feedbackStartTime = 0
+PetFrame.feedbackText = feedbackText
+PetFrame.feedbackStartTime = 0
+
+PlayerHitIndicator:Hide()
+PetHitIndicator:Hide()
 
 
 local function zf_on_load(self)
@@ -68,8 +79,6 @@ local function zf_on_load(self)
     PlayerPVPIcon:SetAlpha(0)
 	TargetFrameTextureFramePVPIcon:SetAlpha(0)
 	FocusFrameTextureFramePVPIcon:SetAlpha(0)
-	PlayerPrestigeBadge:SetAlpha(0)
-	PlayerPrestigePortrait:SetAlpha(0)
 	TargetFrameTextureFramePrestigeBadge:SetAlpha(0)
 	TargetFrameTextureFramePrestigePortrait:SetAlpha(0)
 	FocusFrameTextureFramePrestigeBadge:SetAlpha(0)
