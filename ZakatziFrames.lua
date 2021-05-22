@@ -30,29 +30,6 @@ local function combatUpdate(self, elapsed)
     end
 end
 
-local dampeningFrame = CreateFrame('Frame', nil , UIParent)
-dampeningFrame:SetSize(200, 12)
-dampeningFrame:SetPoint('TOP', UIWidgetTopCenterContainerFrame, 'BOTTOM', 0, -2)
-dampeningFrame.text = dampeningFrame:CreateFontString(nil, 'BACKGROUND')
-dampeningFrame.text:SetFontObject(GameFontNormalSmall)
-dampeningFrame.text:SetAllPoints()
-dampeningFrame.timeSinceLastUpdate = 0
-local updateInterval = 5
-local dampeningText = GetSpellInfo(110310)
-dampeningFrame:SetScript('OnUpdate', function(self, elapsed)
-    self.timeSinceLastUpdate = self.timeSinceLastUpdate + elapsed
-
-    if self.timeSinceLastUpdate > updateInterval then
-        self.text:SetText(dampeningText..': '..C_Commentator.GetDampeningPercent()..'%')
-        self.timeSinceLastUpdate = 0
-    end
-end)
-
-local function zf_entering_world()
-    local instanceType = select(2,IsInInstance())
-    dampeningFrame:SetShown(instanceType == 'arena')
-end
-
 
 local function zf_on_load(self)
     PlayerFrame:ClearAllPoints()
@@ -61,27 +38,6 @@ local function zf_on_load(self)
     TargetFrame:ClearAllPoints()
     TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",684,-420)
     TargetFrame.SetPoint=function()end
-    ActionButton1:ClearAllPoints()
-    ActionButton1:SetPoint("CENTER",-233,-2)
-    ActionButton1.SetPoint = function() end
-    ActionBarUpButton:Hide()
-    ActionBarDownButton:Hide()
-    MultiBarBottomRightButton7:ClearAllPoints()
-    MultiBarBottomRightButton7:SetPoint("CENTER",-650,41)
-    MultiBarBottomRightButton7.SetPoint = function() end
-    MultiBarBottomRightButton1:ClearAllPoints()
-    MultiBarBottomRightButton1:SetPoint("CENTER",-398,41)
-    MultiBarBottomRightButton1.SetPoint = function() end
-    MultiBarBottomLeftButton1:ClearAllPoints()
-    MultiBarBottomLeftButton1:SetPoint("CENTER",-232,47)
-    MultiBarBottomLeftButton1.SetPoint = function() end
-    MainMenuBarArtFrameBackground:Hide()
-    MainMenuBarArtFrame.LeftEndCap:Hide()
-    MainMenuBarArtFrame.RightEndCap:Hide()
-    MainMenuBarArtFrame.PageNumber:Hide()
-    StanceButton1:ClearAllPoints()
-    StanceButton1:SetPoint("CENTER",-6000,0)
-    StanceButton1.SetPoint = function() end
     local r={"MultiBarBottomLeft", "MultiBarBottomRight", "Action", "MultiBarLeft", "MultiBarRight"} 
     for b=1,#r do 
         for i=1,12 do 
@@ -96,10 +52,6 @@ local function zf_on_load(self)
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
-    ObjectiveTrackerFrame:Hide()
-    ObjectiveTrackerFrame:UnregisterAllEvents()
-    ObjectiveTrackerFrame.Show = ObjectiveTrackerFrame.Hide
-    StatusTrackingBarManager: SetAlpha(0)
 
     MinimapZoomIn:Hide()
     MinimapZoomOut:Hide()
@@ -112,9 +64,6 @@ local function zf_on_load(self)
             Minimap_ZoomOut()
         end
     end)
-    LossOfControlFrame.blackBg:SetAlpha(0)
-    LossOfControlFrame.RedLineTop:SetAlpha(0)
-    LossOfControlFrame.RedLineBottom:SetAlpha(0)
 
     PlayerPVPIcon:SetAlpha(0)
 	TargetFrameTextureFramePVPIcon:SetAlpha(0)
@@ -125,16 +74,12 @@ local function zf_on_load(self)
 	TargetFrameTextureFramePrestigePortrait:SetAlpha(0)
 	FocusFrameTextureFramePrestigeBadge:SetAlpha(0)
     FocusFrameTextureFramePrestigePortrait:SetAlpha(0)
-    
     ChatFrameChannelButton:Hide()
-    MicroButtonAndBagsBar:Hide()
     combatFrame:SetScript('OnUpdate', combatUpdate)
-    self:RegisterEvent("PLAYER_ENTERING_WORLD")
 end
 
 local event_handler = {
     ["PLAYER_LOGIN"] = function(self) zf_on_load(self) end,
-    ["PLAYER_ENTERING_WORLD"] = function() zf_entering_world() end,
 }
 
 local function zf_on_event(self,event,...)
