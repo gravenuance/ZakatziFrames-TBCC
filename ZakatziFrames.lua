@@ -24,7 +24,7 @@ local combatInterval = 0.1
 local function combatUpdate(self, elapsed)
     self.timeSinceLastUpdate = self.timeSinceLastUpdate + elapsed
 
-    if self.timeSinceLastUpdate > combatInterval then
+    if self.timeSinceLastUpdate >= combatInterval then
         targetCombatFrame:SetShown(UnitAffectingCombat('target'))
         focusCombatFrame:SetShown(UnitAffectingCombat('focus'))
         self.timeSinceLastUpdate = 0
@@ -37,25 +37,24 @@ PlayerFrame.feedbackText = feedbackText
 PlayerFrame.feedbackStartTime = 0
 PetFrame.feedbackText = feedbackText
 PetFrame.feedbackStartTime = 0
-
 PlayerHitIndicator:Hide()
 PetHitIndicator:Hide()
 
 
 local function zf_on_load(self)
+    -- start combat indicator
+    combatFrame:SetScript('OnUpdate', combatUpdate)
+
+    -- Fix player and target frames
     PlayerFrame:ClearAllPoints()
     PlayerFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",458,-420)
     PlayerFrame.SetPoint=function()end
     TargetFrame:ClearAllPoints()
     TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",684,-420)
     TargetFrame.SetPoint=function()end
-    local r={"MultiBarBottomLeft", "MultiBarBottomRight", "Action", "MultiBarLeft", "MultiBarRight"} 
-    for b=1,#r do 
-        for i=1,12 do 
-            _G[r[b].."Button"..i.."Name"]:SetAlpha(0) 
-        end 
-    end
+    -- enemy nameplates never fade
     SetCVar("nameplateOccludedAlphaMult",1)
+    -- move buffs
     function Movebuff() 
         BuffFrame:ClearAllPoints() 
         BuffFrame:SetScale(1.1) 
@@ -63,24 +62,10 @@ local function zf_on_load(self)
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
-
-    MinimapZoomIn:Hide()
-    MinimapZoomOut:Hide()
-
-    Minimap:EnableMouseWheel(true)
-    Minimap:SetScript('OnMouseWheel', function(self, arg1)
-        if arg1 > 0 then
-            Minimap_ZoomIn()
-        else
-            Minimap_ZoomOut()
-        end
-    end)
-
+    -- Hide PvP Icons
     PlayerPVPIcon:SetAlpha(0)
 	TargetFrameTextureFramePVPIcon:SetAlpha(0)
 	FocusFrameTextureFramePVPIcon:SetAlpha(0)
-    ChatFrameChannelButton:Hide()
-    combatFrame:SetScript('OnUpdate', combatUpdate)
 end
 
 local event_handler = {
