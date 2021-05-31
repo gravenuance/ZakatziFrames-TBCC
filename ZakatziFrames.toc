@@ -1,4 +1,4 @@
-## Title: ZakatziFrames
+## Title: |cFFFFB6C1ZakatziFrames|r
 ## Notes: Minimal addon for my UI settings
 ## DefaultState: Enabled
 ZakatziFrames.lua
