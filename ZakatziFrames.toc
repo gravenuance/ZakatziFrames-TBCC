@@ -1,4 +1,5 @@
 ## Title: |cFFFFB6C1ZakatziFrames|r
 ## Notes: Minimal addon for my UI settings
+## Author: Gravenuance
 ## DefaultState: Enabled
 ZakatziFrames.lua
