@@ -63,9 +63,9 @@ local function zf_on_load(self)
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
     -- Hide PvP Icons
-    PlayerPVPIcon:SetAlpha(0)
-	TargetFrameTextureFramePVPIcon:SetAlpha(0)
-	FocusFrameTextureFramePVPIcon:SetAlpha(0)
+    --PlayerPVPIcon:SetAlpha(0)
+	--TargetFrameTextureFramePVPIcon:SetAlpha(0)
+	--FocusFrameTextureFramePVPIcon:SetAlpha(0)
 end
 
 local event_handler = {
