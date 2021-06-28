@@ -47,10 +47,10 @@ local function zf_on_load(self)
 
     -- Fix player and target frames
     PlayerFrame:ClearAllPoints()
-    PlayerFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",458,-420)
+    PlayerFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",350,-255)
     PlayerFrame.SetPoint=function()end
     TargetFrame:ClearAllPoints()
-    TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",684,-420)
+    TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",575,-255)
     TargetFrame.SetPoint=function()end
     -- enemy nameplates never fade
     SetCVar("nameplateOccludedAlphaMult",1)
@@ -58,7 +58,7 @@ local function zf_on_load(self)
     function Movebuff() 
         BuffFrame:ClearAllPoints() 
         BuffFrame:SetScale(1.1) 
-        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",1000,80) 
+        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",1100,12) 
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
