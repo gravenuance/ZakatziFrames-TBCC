@@ -1,3 +1,10 @@
+local playerX = 420
+
+local targetX = playerX + 225
+
+local playerY = -350
+
+local targetY = playerY
 
 -- Add combat indicator
 local targetCombatFrame = CreateFrame('Frame', nil , TargetFrame)
@@ -47,10 +54,10 @@ local function zf_on_load(self)
 
     -- Fix player and target frames
     PlayerFrame:ClearAllPoints()
-    PlayerFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",350,-255)
+    PlayerFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",playerX,playerY)
     PlayerFrame.SetPoint=function()end
     TargetFrame:ClearAllPoints()
-    TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",575,-255)
+    TargetFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT",targetX,targetY)
     TargetFrame.SetPoint=function()end
     -- enemy nameplates never fade
     SetCVar("nameplateOccludedAlphaMult",1)
@@ -58,7 +65,7 @@ local function zf_on_load(self)
     function Movebuff() 
         BuffFrame:ClearAllPoints() 
         BuffFrame:SetScale(1.1) 
-        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",1100,12) 
+        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",1040,100) 
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
