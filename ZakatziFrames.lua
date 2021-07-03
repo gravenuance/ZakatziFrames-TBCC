@@ -25,16 +25,15 @@ focusCombatFrame.icon:SetTexture([[Interface\CharacterFrame\UI-StateIcon]])
 focusCombatFrame.icon:SetTexCoord(0.55, 0.85, 0.1, 0.35)
 focusCombatFrame:Hide()
 
-local combatFrame = CreateFrame('Frame', nil , UIParent)
-combatFrame.timeSinceLastUpdate = 0
+local timeSinceLastUpdate = 0
 local combatInterval = 0.1
 local function combatUpdate(self, elapsed)
-    self.timeSinceLastUpdate = self.timeSinceLastUpdate + elapsed
+    timeSinceLastUpdate = timeSinceLastUpdate + elapsed
 
-    if self.timeSinceLastUpdate >= combatInterval then
+    if timeSinceLastUpdate >= combatInterval then
         targetCombatFrame:SetShown(UnitAffectingCombat('target'))
         focusCombatFrame:SetShown(UnitAffectingCombat('focus'))
-        self.timeSinceLastUpdate = 0
+        timeSinceLastUpdate = 0
     end
 end
 
@@ -50,7 +49,7 @@ PetHitIndicator:Hide()
 
 local function zf_on_load(self)
     -- start combat indicator
-    combatFrame:SetScript('OnUpdate', combatUpdate)
+    zf_frame:SetScript('OnUpdate', combatUpdate)
 
     -- Fix player and target frames
     PlayerFrame:ClearAllPoints()
