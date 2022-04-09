@@ -6,6 +6,18 @@ local playerY = -350
 
 local targetY = playerY
 
+LoadAddOn("Blizzard_CompactRaidFrames") 
+CRFSort_Group=function(t1, t2) 
+    if UnitIsUnit(t1,"player") then 
+        return false 
+    elseif UnitIsUnit(t2,"player") then 
+        return true 
+    else 
+        return t1 < t2 
+    end 
+end 
+CompactRaidFrameContainer.flowSortFunc=CRFSort_Group
+
 -- Add combat indicator
 local targetCombatFrame = CreateFrame('Frame', nil , TargetFrame)
 targetCombatFrame:SetPoint('LEFT', TargetFrame, 'RIGHT', -68, -15)
@@ -49,7 +61,7 @@ PetHitIndicator:Hide()
 
 local function zf_on_load(self)
     -- start combat indicator
-    zf_frame:SetScript('OnUpdate', combatUpdate)
+    --zf_frame:SetScript('OnUpdate', combatUpdate)
 
     -- Fix player and target frames
     PlayerFrame:ClearAllPoints()
@@ -60,6 +72,7 @@ local function zf_on_load(self)
     TargetFrame.SetPoint=function()end
     -- enemy nameplates never fade
     SetCVar("nameplateOccludedAlphaMult",1)
+    SetCVar("nameplateMaxDistance",41)
     -- move buffs
     function Movebuff() 
         BuffFrame:ClearAllPoints() 
@@ -68,10 +81,6 @@ local function zf_on_load(self)
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
-    -- Hide PvP Icons
-    PlayerPVPIcon:SetAlpha(0)
-	TargetFrameTextureFramePVPIcon:SetAlpha(0)
-	FocusFrameTextureFramePVPIcon:SetAlpha(0)
 end
 
 local event_handler = {
