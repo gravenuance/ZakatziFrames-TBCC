@@ -1,10 +1,16 @@
-local playerX = 420
-
-local targetX = playerX + 225
-
-local playerY = -350
-
+--local playerX = 420
+--local targetX = playerX + 225
+--local playerY = -350
+--local targetY = playerY
+local playerX = 627
+local targetX = playerX + 615
+local playerY = -700
 local targetY = playerY
+--local buffX = 1040
+--local buffY = 100
+local buffX = 800
+local buffY = 440
+
 
 LoadAddOn("Blizzard_CompactRaidFrames") 
 CRFSort_Group=function(t1, t2) 
@@ -37,18 +43,6 @@ focusCombatFrame.icon:SetTexture([[Interface\CharacterFrame\UI-StateIcon]])
 focusCombatFrame.icon:SetTexCoord(0.55, 0.85, 0.1, 0.35)
 focusCombatFrame:Hide()
 
-local timeSinceLastUpdate = 0
-local combatInterval = 0.1
-local function combatUpdate(self, elapsed)
-    timeSinceLastUpdate = timeSinceLastUpdate + elapsed
-
-    if timeSinceLastUpdate >= combatInterval then
-        targetCombatFrame:SetShown(UnitAffectingCombat('target'))
-        focusCombatFrame:SetShown(UnitAffectingCombat('focus'))
-        timeSinceLastUpdate = 0
-    end
-end
-
 -- Hide text in player frame.
 local feedbackText = PlayerFrame:CreateFontString(nil, "OVERLAY", "NumberFontNormalHuge")
 PlayerFrame.feedbackText = feedbackText
@@ -60,8 +54,6 @@ PetHitIndicator:Hide()
 
 
 local function zf_on_load(self)
-    -- start combat indicator
-    --zf_frame:SetScript('OnUpdate', combatUpdate)
 
     -- Fix player and target frames
     PlayerFrame:ClearAllPoints()
@@ -77,7 +69,7 @@ local function zf_on_load(self)
     function Movebuff() 
         BuffFrame:ClearAllPoints() 
         BuffFrame:SetScale(1.1) 
-        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",1040,100) 
+        BuffFrame:SetPoint("CENTER",PlayerFrame,"CENTER",buffX,buffY) 
     end  
     hooksecurefunc("UIParent_UpdateTopFramePositions",Movebuff) 
     Movebuff()
